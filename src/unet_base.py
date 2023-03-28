@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 
+# NOT IN USE
+# This is the base model created from scratch
 
 class contracting(nn.Module):
     def __init__(self):
