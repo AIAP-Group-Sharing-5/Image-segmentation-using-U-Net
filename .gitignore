@@ -1,0 +1,8 @@
+# folders for testing
+testing/
+archive/
+segments/
+
+# other files
+*.pyc
+*.zip
