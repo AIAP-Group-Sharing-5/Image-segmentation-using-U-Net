@@ -557,7 +557,7 @@ plt.show()
 ![Results of our Segmentation Model](/markdown%20images/output.png)
 </div>
 
-![GIF](/markdown%20images/sample_segmentation2.gif)
+![GIF](/markdown%20images/sample_segmentation.gif)
 
 <br>
 
