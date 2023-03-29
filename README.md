@@ -178,7 +178,7 @@ In the decoding layers, it consists of four repetitions of these:
 - 3*3 valid convolutions (stride = 1, with ReLU activation)
 
 #### **Output Layer**
-A 1*1 convolution was used to reduce the feature space from 64 channels to the desired number of classes. A softmax activation and cross entropy loss was then applied pixel-wise.
+A 1*1 convolution was used to reduce the feature space from 64 channels to the desired number of classes. For this implementation, we will be using 2 classes, as such the activation will be a sigmoid function coupled with a binary cross entropy loss function.
 
 <br />
 
@@ -210,12 +210,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image
+# misc imports
 import time
 import os
 import sys
 
 #Importing Utility script
-from src import utils #
+from src import utils
 ```
 
 ### 3.2. Set a seed for reproducibility
@@ -260,14 +261,11 @@ Transforms = A.Compose([
     A.Resize(224,224),
     A.HorizontalFlip(p=0.75),
     A.VerticalFlip(p=0.75),
-    # A.GridDistortion(p=0.75),
     A.Normalize(
         mean=[0.485, 0.456, 0.406],
         std=[0.229, 0.224, 0.225],
     ),
     A.RandomBrightnessContrast(brightness_limit=0.4, contrast_limit=0.4, p=1),
-    # A.PixelDropout(dropout_prob=0.5),
-    # A.RandomShadow(shadow_roi=(0, 0.5, 1, 1), num_shadows_lower=1, num_shadows_upper=2, shadow_dimension=5, p=0.5),
     ToTensorV2(),
 ])
 
@@ -296,10 +294,11 @@ class VGG19UNet(nn.Module):
             self.num_classes = 1
         else:
             self.num_classes = num_classes
+        # Disable gradient calculation for the encoder
         for param in self.features.parameters():
             param.requires_grad = False
 
-        #ENCODER
+        
         self.layer1 = nn.Conv2d(
             in_channels=64,
             out_channels=self.num_classes,
@@ -348,7 +347,7 @@ class VGG19UNet(nn.Module):
 
         self.up_sample_32 = nn.ConvTranspose2d(256, 128, 2, stride=2)
 
-        self.up_sample_21 = nn.ConvTranspose2d(128, 64, 2, stride=2)  # 35 classes
+        self.up_sample_21 = nn.ConvTranspose2d(128, 64, 2, stride=2)
 ```
 
 \
@@ -512,58 +511,16 @@ es.load_best_model(Unet)
 ```py
 EPOCH = 100
 PATIENCE = 10
+# Allowing gradient for the last few layers of VGG19
 for count, layer in enumerate(Unet.features):
     if count > 33:
         layer.requires_grad = True
 
 es = utils.EarlyStopper(patience=PATIENCE, verbose=True,min_epoch=0, model = Unet)
-
 optimizer = torch.optim.Adam(Unet.parameters(), lr=0.0001)
-import time
-for epoch in range(EPOCH):
-    train_loss = []
-    Unet.train()
+# Training code is same as above
+...
 
-    # Training 
-    t1 = time.time()
-    for image, mask in train_dataloader:
-        optimizer.zero_grad()
-        with autocast():
-            image = image.to(device)
-            mask = mask.to(device)
-            output = Unet(image).squeeze(1)
-            loss = criterion(output.float(), mask.float())
-        
-        train_loss.append(loss.item())
-        scaler.scale(loss).backward()
-        scaler.step(optimizer)
-        scaler.update()
-    
-    # Validation
-    Unet.eval()
-    test_loss = []
-    with torch.no_grad():
-        for image, mask in test_dataloader:
-            with autocast():
-                image = image.to(device)
-                mask = mask.to(device)
-                output = Unet(image).squeeze(1)
-                loss = criterion(output.float(), mask.float())
-            test_loss.append(loss.item())
-            # trying out print
-        sample_mask = Unet(sample_image_transformed)
-        prob = F.sigmoid(sample_mask)
-        predicted = (prob > 0.5).float()
-        predicted = predicted.squeeze(0).squeeze(0).cpu().numpy()
-        TO_GIF.append(predicted)
-    
-    t2 = time.time()
-    if epoch % 1 == 0:
-        print(f"Epoch: {epoch+1} / {EPOCH}, Loss: {np.mean(train_loss)}\t"
-            f"Val Loss: {np.mean(test_loss)} \t Time: {t2-t1:.2f}")
-    if es.early_stop(epoch, np.mean(test_loss)):
-        TO_GIF = TO_GIF[:-PATIENCE]
-        break
 ```
 
 ### 3.13. Segmentation Results
@@ -597,6 +554,8 @@ plt.show()
 
 ![Results of our Segmentation Model](/markdown%20images/results.jpg)
 </div>
+
+![GIF](/markdown%20images/sample_segmentation.gif)
 
 <br>
 
