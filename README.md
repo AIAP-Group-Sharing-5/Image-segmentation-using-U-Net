@@ -578,6 +578,7 @@ plt.show()
 </div>
 
 <br>
+
 ## 4. Improvements to U-net
 
 ### 1. V-net:
