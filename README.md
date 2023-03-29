@@ -3,11 +3,25 @@
 <h1>Image-Segmentation-using-U-Net</h1>
 </div>
 
+## 1. Introduction 
+
+### 1.1 Background information on image segmentation
+
+Image segmentation is a fundamental task in computer vision that involves dividing an image into multiple segments, each corresponding to a different object or background. It has many useful real-world applications, including medical image analysis, autonomous driving, and object detection, etc. [[2]](https://pyimagesearch.com/2022/02/21/u-net-image-segmentation-in-keras/#:~:text=U%2DNet%20is%20a%20semantic,such%20as%20the%20Pix2Pix%20generator) 
 
 
+![picture alt](http://via.placeholder.com/1980x1080 "Title is optional")
+Figure 1. Image segmentation example [[1]](https://towardsdatascience.com/u-net-b229b32b4a71) 
 
+Image segmentation originally started from digital image processing coupied with optimization algorithms. However, traditional image segmentation methods involve manually defining regions of interest in an image, which is a tedious and time-consuming process. Moreover, it is subjective and prone to errors, which can lead to inaccurate segmentation results. As a result, this method is not efficient for use in large datasets, and it is difficult to scale up to complex problems. [[1]](https://towardsdatascience.com/u-net-b229b32b4a71) 
 
+With the advent of deep learning, automated image segmentation has become more accurate and efficient. One of the most popular deep learning architectures for image segmentation is U-Net. U-Net is a popular deep learning architecture used for image segmentation, which was first introduced by Ronneberger et al. in 2015 [[8]](https://arxiv.org/abs/1505.04597). In this article, we will discuss the basics of U-Net and how it works.
 
+### 1.2 Introduction to U-Net architecture 
+ 
+U-Net is a fully convolutional neural network architecture and is a semantic segmentation technique specifically designed for biomedical image segmentation, and has since been widely used in various medical imaging applications. The high level overview of the U-Net architecture is that it consists of two parts, the contracting path (also known as encoding path) and the expanding path (also known as decoding path). The contracting path is a typical convolutional neural network that reduces the spatial size of the input image while increasing the number of channels. It consists of several convolutional and max-pooling layers that extract high-level features from the input image. The expanding path is responsible for recovering the spatial information lost during the contracting path. It consists of several transposed convolutional layers that increase the spatial size of the feature maps while reducing the number of channels.[[8]](https://arxiv.org/abs/1505.04597) 
+
+Skip connections are also used to combine the high-level features from the contracting path with the upsampled features from the expanding path that allow for the preservation of spatial information lost during the downsampling process. This feature improves the accuracy of segmentation masks, especially in areas of an image with complex structures. [[8]](https://arxiv.org/abs/1505.04597) We will dive much further into details on the U-Net Architecture below. 
 
 ## 2. Overview of U-Net Architecture
 
