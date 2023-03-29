@@ -440,7 +440,7 @@ from src.vgg import VGG19UNet
 Unet = VGG19UNet(num_classes=1).to(device)
 
 #Defining the optimizer and Loss function
-optimizer = torch.optim.Adam(Unet.parameters(), lr=0.001)
+optimizer = torch.optim.Adam(Unet.parameters(), lr=0.0001)
 criterion = nn.BCEWithLogitsLoss()
 es = utils.EarlyStopper(patience=50, verbose=True, model=Unet)
 ```
@@ -519,7 +519,7 @@ for count, layer in enumerate(Unet.features):
         layer.requires_grad = True
 
 es = utils.EarlyStopper(patience=PATIENCE, verbose=True,min_epoch=0, model = Unet)
-optimizer = torch.optim.Adam(Unet.parameters(), lr=0.0001)
+optimizer = torch.optim.Adam(Unet.parameters(), lr=0.00001)
 # Training code is same as above
 ...
 
