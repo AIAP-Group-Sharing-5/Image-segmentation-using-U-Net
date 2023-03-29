@@ -578,3 +578,37 @@ plt.show()
 </div>
 
 <br>
+## 4. Improvements to U-net
+
+### 1. V-net:
+
+Uses a convolutional layer to replace the up-sampling and down-sampling pooling layer. The idea behind V-Net is that using the Maxpool operation leads to a lot of information loss thus replacing it with another series of Conv operations without padding will help in preserving more information. However this also increases the number of trainable parameters which is more computationally expensive. [9]
+
+### 2. U-net++ 
+Improves upon U-net by adding nested and dense skip connections. Dense skip connections enable every layer in the decoder to be connected to every layer in the corresponding encoder path. While nested skip connections connect layers at the same resolution in different paths of the encoder and decoder. Specifically, the output of a layer in the encoder is concatenated with the output of a layer at the same resolution in the corresponding decoder path.
+
+### 3. Attention U-net 
+Incorporates the attention mechanism in NLP, giving the skip connections an extra idea of which region to focus on while segmenting the given object.
+
+## 5. Concluding remarks
+Overall, U-Net is a powerful image segmentation method that has been widely used in various fields, especially in medical imaging. Its unique architecture and skip connections enable it to accurately segment images while retaining high resolution details. However, there are still challenges that need to be addressed, such as class imbalance, small datasets, and overfitting. Despite these limitations, U-Net remains a popular choice for image segmentation tasks and has the potential to be further improved through future research.
+
+## References
+
+[1] https://towardsdatascience.com/u-net-b229b32b4a71
+
+[2] https://pyimagesearch.com/2022/02/21/u-net-image-segmentation-in-keras/#:~:text=U%2DNet%20is%20a%20semantic,such%20as%20the%20Pix2Pix%20generator
+
+[3] https://github.com/milesial/Pytorch-UNet
+
+[4] https://www.analyticsvidhya.com/blog/2019/07/computer-vision-implementing-mask-r-cnn-image-segmentation/
+
+[5] https://epoch.aisingapore.org/2023/02/image-compression-with-k-means/
+
+[6] https://www.tensorflow.org/tutorials/images/segmentation
+
+[7] https://www.v7labs.com/blog/image-segmentation-guide
+
+[8] https://arxiv.org/abs/1505.04597
+
+[9] https://medium.com/aiguys/attention-u-net-resunet-many-more-65709b90ac8b
