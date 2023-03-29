@@ -1,13 +1,13 @@
 
-<div style="text-align: center;">
-<h1>Image-Segmentation-using-U-Net</h1>
-</div>
+
+<h1 align="center">Image-Segmentation-using-U-Net</h1>
+
 
 ## 1. Introduction 
 
-### 1.1 Background information on image segmentation
+### 1.1 Background Information on Image Segmentation
 
-Image segmentation is a fundamental task in computer vision that involves dividing an image into multiple segments, each corresponding to a different object or background. It has many useful real-world applications, including medical image analysis, autonomous driving, and object detection, etc. [[2]](https://pyimagesearch.com/2022/02/21/u-net-image-segmentation-in-keras/#:~:text=U%2DNet%20is%20a%20semantic,such%20as%20the%20Pix2Pix%20generator) 
+Image segmentation is a fundamental task in computer vision that involves dividing an image into multiple segments, each corresponding to a different object or instance. It has many useful real-world applications, including medical image analysis, autonomous driving, and object detection, etc. [[2]](https://pyimagesearch.com/2022/02/21/u-net-image-segmentation-in-keras/#:~:text=U%2DNet%20is%20a%20semantic,such%20as%20the%20Pix2Pix%20generator) 
 
 
 ![picture alt](/markdown%20images/cat_image_segmentation.jpg)
@@ -16,15 +16,15 @@ Figure: Image segmentation example [[Image Source]](https://towardsdatascience.c
 
 Image segmentation originally started from digital image processing coupied with optimization algorithms. However, traditional image segmentation methods involve manually defining regions of interest in an image, which is a tedious and time-consuming process. Moreover, it is subjective and prone to errors, which can lead to inaccurate segmentation results. As a result, this method is not efficient for use in large datasets, and it is difficult to scale up to complex problems. [[1]](https://towardsdatascience.com/u-net-b229b32b4a71) 
 
-With the advent of deep learning, automated image segmentation has become more accurate and efficient. One of the most popular deep learning architectures for image segmentation is U-Net. U-Net is a popular deep learning architecture used for image segmentation, which was first introduced by Ronneberger et al. in 2015 [[8]](https://arxiv.org/abs/1505.04597). In this article, we will discuss the basics of U-Net and how it works.
+With the advent of deep learning, automated image segmentation has become more accurate and efficient. One of the most popular deep learning architectures for image segmentation is U-Net. This architecture was first introduced by Ronneberger et al. in 2015 [[8]](https://arxiv.org/abs/1505.04597) for the purpose of biomedical image segmentation. In this article, we will discuss the details of U-Net and its architecture.
 
-> 📖 **Further Exploration** There are other popular image segmentation architectures which you could further explore on:
+> 📖 **Further Exploration:** There are other popular image segmentation architectures which you could further explore on:
 > 1. Seg-Net
 > 2. Deep Lab
 > 3. Mask R-CNN
 ### 1.2 Introduction to U-Net architecture 
  
-U-Net is a fully convolutional neural network architecture and is a semantic segmentation technique specifically designed for biomedical image segmentation, and has since been widely used in various medical imaging applications. The high level overview of the U-Net architecture is that it consists of two parts, the contracting path (also known as encoding path) and the expanding path (also known as decoding path). The contracting path is a typical convolutional neural network that reduces the spatial size of the input image while increasing the number of channels. It consists of several convolutional and max-pooling layers that extract high-level features from the input image. The expanding path is responsible for recovering the spatial information lost during the contracting path. It consists of several transposed convolutional layers that increase the spatial size of the feature maps while reducing the number of channels.[[8]](https://arxiv.org/abs/1505.04597) 
+U-Net is a fully convolutional neural network architecture and is a semantic segmentation technique specifically designed for biomedical image segmentation. The high level overview of the U-Net architecture is that it consists of two parts, the contracting path (also known as encoding path) and the expanding path (also known as decoding path). The contracting path is a typical convolutional neural network that reduces the spatial size of the input image while increasing the number of channels. It consists of several convolutional and max-pooling layers that extract high-level features from the input image. The expanding path is responsible for recovering the spatial information lost during the contracting path. It consists of several transposed convolutional layers that increase the spatial size of the feature maps while reducing the number of channels.[[8]](https://arxiv.org/abs/1505.04597) 
 
 Skip connections are also used to combine the high-level features from the contracting path with the upsampled features from the expanding path that allow for the preservation of spatial information lost during the downsampling process. This feature improves the accuracy of segmentation masks, especially in areas of an image with complex structures. [[8]](https://arxiv.org/abs/1505.04597) We will dive much further into details on the U-Net Architecture below. 
 
@@ -157,7 +157,7 @@ has 23 convolutional layers."*
 
 <br>
 
-As stated in the excerpt, the architecture is made up of an encoder (contracting) and decoder (expansive), with no fully connected layers present.
+The network's architecture can be broken down into three key portions:
 
 #### **Encoder**
 
@@ -186,7 +186,9 @@ A 1*1 convolution was used to reduce the feature space from 64 channels to the d
 
 Let's take a look at how we can implement an image segmentation model using the Pytorch framework and a pre-trained VGG-19 model.
 
-The image dataset is taken from....
+For our image segmentation implementation, we will use a [Kaggle](https://www.kaggle.com/datasets/faizalkarim/flood-area-segmentation) dataset which consists of 290 Flood Area images with its corresponding masks. The task of this Kaggle dataset is to create a segmentation model to accurately segment out the water region in a given picture of a flood hit area. 
+
+> 📖 **Further Exploration:** In this article, we implement an image segmentation model using the Pytorch Framework, however TensorFlow has an end-to-end tutorial using a pre-trained modified U-Net which you can further read on here [TensorFlow Image Segmentation Tutorial](https://www.tensorflow.org/tutorials/images/segmentation)
 
 ### 3.1. Import relevant libraries
 
@@ -621,14 +623,10 @@ Overall, U-Net is a powerful image segmentation method that has been widely used
 
 [3] https://github.com/milesial/Pytorch-UNet
 
-[4] https://www.analyticsvidhya.com/blog/2019/07/computer-vision-implementing-mask-r-cnn-image-segmentation/
+[4] https://www.tensorflow.org/tutorials/images/segmentation
 
-[5] https://epoch.aisingapore.org/2023/02/image-compression-with-k-means/
+[5] https://www.v7labs.com/blog/image-segmentation-guide
 
-[6] https://www.tensorflow.org/tutorials/images/segmentation
+[6] https://arxiv.org/abs/1505.04597
 
-[7] https://www.v7labs.com/blog/image-segmentation-guide
-
-[8] https://arxiv.org/abs/1505.04597
-
-[9] https://medium.com/aiguys/attention-u-net-resunet-many-more-65709b90ac8b
+[7] https://medium.com/aiguys/attention-u-net-resunet-many-more-65709b90ac8b
