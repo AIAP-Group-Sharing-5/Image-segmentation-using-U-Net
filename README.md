@@ -18,6 +18,10 @@ Image segmentation originally started from digital image processing coupied with
 
 With the advent of deep learning, automated image segmentation has become more accurate and efficient. One of the most popular deep learning architectures for image segmentation is U-Net. U-Net is a popular deep learning architecture used for image segmentation, which was first introduced by Ronneberger et al. in 2015 [[8]](https://arxiv.org/abs/1505.04597). In this article, we will discuss the basics of U-Net and how it works.
 
+> 📖 **Further Exploration** There are other popular image segmentation architectures which you could further explore on:
+> 1. Seg-Net
+> 2. Deep Lab
+> 3. Mask R-CNN
 ### 1.2 Introduction to U-Net architecture 
  
 U-Net is a fully convolutional neural network architecture and is a semantic segmentation technique specifically designed for biomedical image segmentation, and has since been widely used in various medical imaging applications. The high level overview of the U-Net architecture is that it consists of two parts, the contracting path (also known as encoding path) and the expanding path (also known as decoding path). The contracting path is a typical convolutional neural network that reduces the spatial size of the input image while increasing the number of channels. It consists of several convolutional and max-pooling layers that extract high-level features from the input image. The expanding path is responsible for recovering the spatial information lost during the contracting path. It consists of several transposed convolutional layers that increase the spatial size of the feature maps while reducing the number of channels.[[8]](https://arxiv.org/abs/1505.04597) 
