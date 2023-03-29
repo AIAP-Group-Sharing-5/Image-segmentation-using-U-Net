@@ -11,6 +11,7 @@ Image segmentation is a fundamental task in computer vision that involves dividi
 
 
 ![picture alt](/markdown%20images/cat_image_segmentation.jpg)
+
 Figure 1. Image segmentation example [[1]](https://towardsdatascience.com/u-net-b229b32b4a71) 
 
 Image segmentation originally started from digital image processing coupied with optimization algorithms. However, traditional image segmentation methods involve manually defining regions of interest in an image, which is a tedious and time-consuming process. Moreover, it is subjective and prone to errors, which can lead to inaccurate segmentation results. As a result, this method is not efficient for use in large datasets, and it is difficult to scale up to complex problems. [[1]](https://towardsdatascience.com/u-net-b229b32b4a71) 
