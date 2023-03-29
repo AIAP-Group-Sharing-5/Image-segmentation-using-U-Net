@@ -592,7 +592,7 @@ Improves upon U-net by adding nested and dense skip connections. Dense skip conn
 Incorporates the attention mechanism in NLP, giving the skip connections an extra idea of which region to focus on while segmenting the given object.
 
 ## 5. Concluding remarks
-Overall, U-Net is a powerful image segmentation method that has been widely used in various fields, especially in medical imaging. Its unique architecture and skip connections enable it to accurately segment images while retaining high resolution details. However, there are still challenges that need to be addressed, such as class imbalance, small datasets, and overfitting. Despite these limitations, U-Net remains a popular choice for image segmentation tasks and has the potential to be further improved through future research.
+Overall, U-Net is a powerful image segmentation method that has been widely used in various fields, especially in medical imaging. Its unique architecture and skip connections enable it to accurately segment images while retaining high resolution details. However, there are still challenges that need to be addressed, such as class imbalance, small datasets, and overfitting. Despite these limitations, recent studies have proposed various improvements to U-net (mentioned in Section 4) and these variations have shown promising results in improving image segmentation performance. U-Net will remain a popular choice for image segmentation tasks and has the potential to be further improved through future research.
 
 ## References
 
