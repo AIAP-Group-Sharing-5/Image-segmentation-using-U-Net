@@ -554,7 +554,7 @@ plt.show()
 <div style="text-align: center;">
 
 
-![Results of our Segmentation Model](/markdown%20images/results.jpg)
+![Results of our Segmentation Model](/markdown%20images/output.png)
 </div>
 
 ![GIF](/markdown%20images/sample_segmentation.gif)
