@@ -214,6 +214,7 @@ from PIL import Image
 import time
 import os
 import sys
+sys.path.append('..')
 
 #Importing Utility script
 from src import utils
@@ -225,7 +226,7 @@ torch.manual_seed(42)
 np.random.seed(42)
 ```
 
-### 3.3. Loading Image from Folder
+### 3.3. Loading Image Paths from Folder
 ```py
 image_path = os.listdir(os.path.join('archive', 'Image'))
 mask_path = os.listdir(os.path.join('archive', 'Mask'))
@@ -280,6 +281,7 @@ base = A.Compose([
 ```
 ### 3.7. Creating the U-Net model using VGG-19
 \
+Initially, we used the base model as stated in architecture section, however the performance was not as good as we expected. We then decided to use a pre-trained VGG-19 model as our encoder and use the same decoder as the base model. This gave us a better performance as compared to the base model.
 **Encoder Block**
 ```py
 import torchvision.models as models
@@ -421,8 +423,8 @@ class CustomFloodDataset(Dataset):
         return len(self.image_list)
 
 #Carrying out the data augmentation to the train and test set defined in 3.6
-train_dataset = CustomFloodDataset(train_image, train_mask, transform=Transforms) 
-test_dataset = CustomFloodDataset(test_image, test_mask, transform=base) 
+train_dataset = utils.CustomFloodDataset(train_image, train_mask, transform=Transforms) 
+test_dataset = utils.CustomFloodDataset(test_image, test_mask, transform=base) 
 ```
 
 ### 3.9. Setting up a DataLoader
@@ -433,7 +435,7 @@ test_dataloader = DataLoader(test_dataset, batch_size=16, shuffle=True)
 
 ### 3.10. Setting up the model for training
 ```py
-sys.path.append('..')
+
 from src.vgg import VGG19UNet
 Unet = VGG19UNet(num_classes=1).to(device)
 

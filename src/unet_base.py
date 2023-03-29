@@ -33,11 +33,11 @@ class contracting(nn.Module):
             nn.Conv2d(
                 in_channels=128, out_channels=256, kernel_size=3, stride=1, padding=1
             ),
-            nn.LeakyReLU(),
+            nn.ReLU(),
             nn.Conv2d(
                 in_channels=256, out_channels=256, kernel_size=3, stride=1, padding=1
             ),
-            nn.LeakyReLU(),
+            nn.ReLU(),
             nn.Dropout2d(0.25),
         )
 
@@ -45,11 +45,11 @@ class contracting(nn.Module):
             nn.Conv2d(
                 in_channels=256, out_channels=512, kernel_size=3, stride=1, padding=1
             ),
-            nn.LeakyReLU(),
+            nn.ReLU(),
             nn.Conv2d(
                 in_channels=512, out_channels=512, kernel_size=3, stride=1, padding=1
             ),
-            nn.LeakyReLU(),
+            nn.ReLU(),
             nn.Dropout2d(0.25),
         )
 
@@ -57,11 +57,11 @@ class contracting(nn.Module):
             nn.Conv2d(
                 in_channels=512, out_channels=1024, kernel_size=3, stride=1, padding=1
             ),
-            nn.LeakyReLU(),
+            nn.ReLU(),
             nn.Conv2d(
                 in_channels=1024, out_channels=1024, kernel_size=3, stride=1, padding=1
             ),
-            nn.LeakyReLU(),
+            nn.ReLU(),
             nn.Dropout2d(0.25),
         )
 
@@ -77,10 +77,14 @@ class contracting(nn.Module):
 
 
 class expansive(nn.Module):
-    def __init__(self):
+    def __init__(self, num_classes=1):
         super().__init__()
-
-        self.layer1 = nn.Conv2d(64, 35, 3, stride=1, padding=1)
+        assert isinstance(num_classes, int) and num_classes > 0, "num_classes must be a positive integer"
+        if num_classes == 2:
+            self._num_classes = 1
+        else:
+            self._num_classes = num_classes
+        self.layer1 = nn.Conv2d(64, self._num_classes, 3, stride=1, padding=1)
 
         self.layer2 = nn.Sequential(
             nn.Conv2d(128, 64, 3, stride=1, padding=1),
@@ -140,7 +144,7 @@ class expansive(nn.Module):
 
 
 class unet(nn.Module):
-    def __init__(self):
+    def __init__(self, num_classes=1):
         super().__init__()
         self.down = contracting()
         self.up = expansive()
