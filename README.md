@@ -22,6 +22,7 @@ With the advent of deep learning, automated image segmentation has become more a
 > 1. Seg-Net
 > 2. Deep Lab
 > 3. Mask R-CNN
+> 4. Segment Anything Model (SAM)
 ### 1.2 Introduction to U-Net architecture 
  
 U-Net is a fully convolutional neural network architecture and is a semantic segmentation technique specifically designed for biomedical image segmentation. The high level overview of the U-Net architecture is that it consists of two parts, the contracting path (also known as encoding path) and the expanding path (also known as decoding path). The contracting path is a typical convolutional neural network that reduces the spatial size of the input image while increasing the number of channels. It consists of several convolutional and max-pooling layers that extract high-level features from the input image. The expanding path is responsible for recovering the spatial information lost during the contracting path. It consists of several transposed convolutional layers that increase the spatial size of the feature maps while reducing the number of channels.[[8]](https://arxiv.org/abs/1505.04597) 
@@ -282,6 +283,7 @@ base = A.Compose([
 ### 3.7. Creating the U-Net model using VGG-19
 \
 Initially, we used the base model as stated in architecture section, however the performance was not as good as we expected. We then decided to use a pre-trained VGG-19 model as our encoder and use the same decoder as the base model. This gave us a better performance as compared to the base model.
+\
 **Encoder Block**
 ```py
 import torchvision.models as models
