@@ -29,6 +29,14 @@ U-Net is a fully convolutional neural network architecture and is a semantic seg
 
 Skip connections are also used to combine the high-level features from the contracting path with the upsampled features from the expanding path that allow for the preservation of spatial information lost during the downsampling process. This feature improves the accuracy of segmentation masks, especially in areas of an image with complex structures. [[8]](https://arxiv.org/abs/1505.04597) We will dive much further into details on the U-Net Architecture below. 
 
+<br />
+<div style="text-align: center;">
+
+![Visual representation of U-Net's Architecture](/markdown%20images/U-net.png)
+    
+[Image Source](https://arxiv.org/abs/1505.04597)
+</div>
+
 ## 2. Overview of U-Net Architecture
 
 ### 2.1. Review of key concepts used in U-net’s architecture
